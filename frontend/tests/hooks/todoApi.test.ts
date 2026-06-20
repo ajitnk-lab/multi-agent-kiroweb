@@ -8,7 +8,7 @@
  */
 
 // Provide import.meta.env stub for the module under test
-// @ts-ignore
+// @ts-expect-error
 if (typeof globalThis.importMetaEnv === 'undefined') {
   Object.defineProperty(globalThis, 'importMetaEnv', { value: {} });
 }
