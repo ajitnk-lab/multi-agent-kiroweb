@@ -1,8 +1,8 @@
 # Execution Status
 
 ## Current State
-- **Last completed wave:** 5
-- **Next wave to execute:** 6
+- **Last completed wave:** 10
+- **Next wave to execute:** 11
 - **Branch:** feature/todo-app-impl
 
 ## Completed Waves
@@ -12,11 +12,11 @@
 - [x] Wave 3 — backend shared libs (Tasks 2.1, 2.5, 2.6, 2.7)
 - [x] Wave 4 — property tests for libs (Tasks 2.2, 2.3, 2.4, 2.8, 2.9)
 - [x] Wave 5 — Lambda handlers (Tasks 3.1, 3.3, 3.5, 3.7)
-- [ ] Wave 6 — property tests for handlers (Tasks 3.2, 3.4, 3.6, 3.8)
-- [ ] Wave 7 — frontend todoApi service (Task 5.1)
-- [ ] Wave 8 — useApi hook (Task 5.2)
-- [ ] Wave 9 — useTodos hook (Task 5.3)
-- [ ] Wave 10 — frontend components (Tasks 6.1, 6.2, 6.3, 6.4)
+- [x] Wave 6 — property tests for handlers (Tasks 3.2, 3.4, 3.6, 3.8)
+- [x] Wave 7 — frontend todoApi service (Task 5.1)
+- [x] Wave 8 — useApi hook (Task 5.2)
+- [x] Wave 9 — useTodos hook (Task 5.3)
+- [x] Wave 10 — frontend components (Tasks 6.1, 6.2, 6.3, 6.4)
 - [ ] Wave 11 — frontend property tests (Tasks 6.5, 6.6)
 - [ ] Wave 12 — CDK stack (Task 8.1)
 - [ ] Wave 13 — CDK tests + CI/CD (Tasks 8.2, 9.1)
@@ -27,4 +27,5 @@
 - Monorepo setup: ✅ pass
 - Backend tsc --noEmit: ✅ pass
 - Property tests (libs): ✅ 5/5 passing
-- Bug found & fixed: serializer.ts Array.isArray check
+- Property tests (handlers): ✅ 4/4 passing
+- Frontend components: ✅ all created
