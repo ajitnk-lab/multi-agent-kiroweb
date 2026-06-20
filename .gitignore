@@ -1,5 +1,7 @@
 node_modules/
 dist/
+!frontend/dist/
+!frontend/dist/.gitkeep
 .env
 *.js.map
 *.d.ts.map
