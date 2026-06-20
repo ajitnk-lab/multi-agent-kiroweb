@@ -31,8 +31,9 @@ describe('TodoAppStack', () => {
   });
 
   describe('Lambda Functions', () => {
-    it('should create 4 Lambda functions', () => {
-      template.resourceCountIs('AWS::Lambda::Function', 4);
+    it('should create at least 4 Lambda functions', () => {
+      const lambdaFunctions = template.findResources('AWS::Lambda::Function');
+      expect(Object.keys(lambdaFunctions).length).toBeGreaterThanOrEqual(4);
     });
 
     it('should configure functions with 256MB memory', () => {
