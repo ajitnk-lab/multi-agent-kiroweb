@@ -9,7 +9,7 @@
     "test:coverage": "jest --coverage",
     "synth": "cdk synth",
     "deploy": "cdk deploy --require-approval never",
-    "lint": "eslint lib/ bin/ test/"
+    "lint": "eslint --ext .ts lib/ bin/ test/"
   },
   "dependencies": {
     "aws-cdk-lib": "^2.150.0",
