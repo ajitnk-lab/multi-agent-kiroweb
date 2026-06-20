@@ -14,13 +14,11 @@
   },
   "dependencies": {
     "@aws-sdk/client-dynamodb": "^3.600.0",
-    "@aws-sdk/lib-dynamodb": "^3.600.0",
-    "uuid": "^9.0.0"
+    "@aws-sdk/lib-dynamodb": "^3.600.0"
   },
   "devDependencies": {
     "@types/aws-lambda": "^8.10.140",
     "@types/jest": "^29.5.12",
-    "@types/uuid": "^9.0.8",
     "@typescript-eslint/eslint-plugin": "^7.0.0",
     "@typescript-eslint/parser": "^7.0.0",
     "eslint": "^8.57.0",
