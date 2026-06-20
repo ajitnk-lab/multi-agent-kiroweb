@@ -68,14 +68,23 @@ jobs:
       - name: Build backend
         run: cd backend && npm run build
 
+      - name: Build frontend
+        run: cd frontend && npm run build
+
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
           role-to-assume: arn:aws:iam::149146127862:role/github-actions-multi-agent-kiroweb
           aws-region: ap-south-1
 
+      - name: CDK Bootstrap
+        run: cd infrastructure && npx cdk bootstrap aws://149146127862/ap-south-1
+
       - name: CDK Synth
         run: cd infrastructure && npx cdk synth
 
       - name: CDK Deploy
-        run: cd infrastructure && npx cdk deploy --require-approval never
+        run: cd infrastructure && npx cdk deploy --require-approval never --outputs-file outputs.json
+
+      - name: Show deployment outputs
+        run: cat infrastructure/outputs.json
