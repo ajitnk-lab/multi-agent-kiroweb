@@ -1,0 +1,23 @@
+{
+  "name": "todo-app-multi-agent",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "frontend",
+    "backend",
+    "infrastructure"
+  ],
+  "scripts": {
+    "build": "npm run build --workspaces",
+    "test": "npm run test --workspaces",
+    "test:unit": "npm run test:unit --workspaces --if-present",
+    "test:integration": "npm run test:integration --workspaces --if-present",
+    "test:properties": "npm run test:properties --workspaces --if-present",
+    "test:coverage": "npm run test:coverage --workspaces --if-present",
+    "lint": "npm run lint --workspaces --if-present",
+    "deploy": "cd infrastructure && npx cdk deploy --require-approval never"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}
