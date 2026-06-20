@@ -1,0 +1,244 @@
+openapi: '3.0.3'
+info:
+  title: Todo App API
+  description: REST API for managing todo items
+  version: '1.0.0'
+  
+servers:
+  - url: https://{apiId}.execute-api.{region}.amazonaws.com/prod
+    description: Production API
+    variables:
+      apiId:
+        default: 'xxxxx'
+      region:
+        default: 'us-east-1'
+
+paths:
+  /todos:
+    get:
+      summary: List all todo items
+      description: Returns up to 100 todo items sorted by createdAt descending
+      operationId: listTodos
+      responses:
+        '200':
+          description: Successful response with array of todo items
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TodoItem'
+              example:
+                - id: "a1b2c3d4-e5f6-4a7b-8c9d-e0f1a2b3c4d5"
+                  title: "Buy groceries"
+                  description: "Milk, eggs, bread"
+                  status: "incomplete"
+                  createdAt: "2024-01-15T10:30:00.000Z"
+                  updatedAt: "2024-01-15T10:30:00.000Z"
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    post:
+      summary: Create a new todo item
+      description: Creates a new todo item with the provided title and optional description
+      operationId: createTodo
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateTodoRequest'
+            example:
+              title: "Buy groceries"
+              description: "Milk, eggs, bread"
+      responses:
+        '201':
+          description: Todo item created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TodoItem'
+              example:
+                id: "a1b2c3d4-e5f6-4a7b-8c9d-e0f1a2b3c4d5"
+                title: "Buy groceries"
+                description: "Milk, eggs, bread"
+                status: "incomplete"
+                createdAt: "2024-01-15T10:30:00.000Z"
+                updatedAt: "2024-01-15T10:30:00.000Z"
+        '400':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error: true
+                message: "A non-empty title is required"
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /todos/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        description: UUID v4 identifier of the todo item
+        schema:
+          type: string
+          format: uuid
+    put:
+      summary: Update a todo item
+      description: Updates specified fields of an existing todo item
+      operationId: updateTodo
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateTodoRequest'
+            example:
+              title: "Buy organic groceries"
+              status: "complete"
+      responses:
+        '200':
+          description: Todo item updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TodoItem'
+        '400':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Todo item not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error: true
+                message: "No todo item found with id: a1b2c3d4-e5f6-4a7b-8c9d-e0f1a2b3c4d5"
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    delete:
+      summary: Delete a todo item
+      description: Permanently removes a todo item
+      operationId: deleteTodo
+      responses:
+        '200':
+          description: Todo item deleted successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    format: uuid
+              example:
+                id: "a1b2c3d4-e5f6-4a7b-8c9d-e0f1a2b3c4d5"
+        '400':
+          description: Invalid id format
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Todo item not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+components:
+  schemas:
+    TodoItem:
+      type: object
+      required: [id, title, description, status, createdAt, updatedAt]
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier (UUID v4)
+        title:
+          type: string
+          minLength: 1
+          maxLength: 255
+          description: Title of the todo item
+        description:
+          type: string
+          maxLength: 1024
+          nullable: true
+          description: Optional description
+        status:
+          type: string
+          enum: [incomplete, complete]
+          description: Current status
+        createdAt:
+          type: string
+          format: date-time
+          description: ISO 8601 UTC creation timestamp
+        updatedAt:
+          type: string
+          format: date-time
+          description: ISO 8601 UTC last update timestamp
+
+    CreateTodoRequest:
+      type: object
+      required: [title]
+      properties:
+        title:
+          type: string
+          minLength: 1
+          maxLength: 255
+          description: Title (required, 1-255 characters)
+        description:
+          type: string
+          maxLength: 1024
+          description: Optional description (max 1024 characters)
+
+    UpdateTodoRequest:
+      type: object
+      minProperties: 1
+      properties:
+        title:
+          type: string
+          minLength: 1
+          maxLength: 255
+        description:
+          type: string
+          maxLength: 1024
+        status:
+          type: string
+          enum: [incomplete, complete]
+
+    ErrorResponse:
+      type: object
+      required: [error, message]
+      properties:
+        error:
+          type: boolean
+          enum: [true]
+        message:
+          type: string
+          description: Human-readable error description

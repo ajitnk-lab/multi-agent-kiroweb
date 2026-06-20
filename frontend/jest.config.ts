@@ -8,7 +8,7 @@ const config: Config = {
   moduleNameMapper: {
     '\\.(css|less|scss)$': '<rootDir>/tests/__mocks__/styleMock.ts'
   },
-  setupFilesAfterFramework: [],
+
   collectCoverageFrom: [
     'src/**/*.{ts,tsx}',
     '!src/types/**',
