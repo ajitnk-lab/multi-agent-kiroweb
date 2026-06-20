@@ -74,6 +74,9 @@ jobs:
           role-to-assume: arn:aws:iam::149146127862:role/github-actions-multi-agent-kiroweb
           aws-region: ap-south-1
 
+      - name: CDK Bootstrap
+        run: cd infrastructure && npx cdk bootstrap aws://149146127862/ap-south-1
+
       - name: CDK Synth
         run: cd infrastructure && npx cdk synth
 
