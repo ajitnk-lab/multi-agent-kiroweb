@@ -1,17 +1,17 @@
 # Execution Status
 
 ## Current State
-- **Last completed wave:** 0
-- **Next wave to execute:** 1
+- **Last completed wave:** 5
+- **Next wave to execute:** 6
 - **Branch:** feature/todo-app-impl
 
 ## Completed Waves
 - [x] Wave 0 — monorepo root setup (Task 1.1)
-- [ ] Wave 1 — package scaffolding (Tasks 1.2, 1.3, 1.4)
-- [ ] Wave 2 — shared types (Task 1.5)
-- [ ] Wave 3 — backend shared libs (Tasks 2.1, 2.5, 2.6, 2.7)
-- [ ] Wave 4 — property tests for libs (Tasks 2.2, 2.3, 2.4, 2.8, 2.9)
-- [ ] Wave 5 — Lambda handlers (Tasks 3.1, 3.3, 3.5, 3.7)
+- [x] Wave 1 — package scaffolding (Tasks 1.2, 1.3, 1.4)
+- [x] Wave 2 — shared types (Task 1.5)
+- [x] Wave 3 — backend shared libs (Tasks 2.1, 2.5, 2.6, 2.7)
+- [x] Wave 4 — property tests for libs (Tasks 2.2, 2.3, 2.4, 2.8, 2.9)
+- [x] Wave 5 — Lambda handlers (Tasks 3.1, 3.3, 3.5, 3.7)
 - [ ] Wave 6 — property tests for handlers (Tasks 3.2, 3.4, 3.6, 3.8)
 - [ ] Wave 7 — frontend todoApi service (Task 5.1)
 - [ ] Wave 8 — useApi hook (Task 5.2)
@@ -25,3 +25,6 @@
 
 ## Last Validation
 - Monorepo setup: ✅ pass
+- Backend tsc --noEmit: ✅ pass
+- Property tests (libs): ✅ 5/5 passing
+- Bug found & fixed: serializer.ts Array.isArray check
