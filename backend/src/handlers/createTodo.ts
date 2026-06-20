@@ -1,5 +1,5 @@
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda';
-import { v4 as uuidv4 } from 'uuid';
+import { randomUUID } from 'crypto';
 import { validateTitle, validateDescription } from '../lib/validator';
 import { deserializeCreateRequest, serializeTodoItem, SerializationError } from '../lib/serializer';
 import { putItem } from '../lib/dynamodb-client';
@@ -40,7 +40,7 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
     // Create the todo item
     const now = new Date().toISOString();
     const todoItem: TodoItem = {
-      id: uuidv4(),
+      id: randomUUID(),
       title: request.title.trim(),
       description: request.description ?? null,
       status: 'incomplete',
