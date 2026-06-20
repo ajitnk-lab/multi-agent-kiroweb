@@ -11,7 +11,7 @@
     "test:unit": "jest --testPathPattern=tests",
     "test:properties": "jest --testPathPattern=tests/properties",
     "test:coverage": "jest --coverage",
-    "lint": "eslint src/ tests/"
+    "lint": "eslint --ext .ts,.tsx src/ tests/"
   },
   "dependencies": {
     "react": "^18.3.0",

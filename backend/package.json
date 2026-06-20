@@ -10,7 +10,7 @@
     "test:integration": "jest --testPathPattern=tests/integration",
     "test:properties": "jest --testPathPattern=tests/unit/properties",
     "test:coverage": "jest --coverage",
-    "lint": "eslint src/ tests/"
+    "lint": "eslint --ext .ts src/ tests/"
   },
   "dependencies": {
     "@aws-sdk/client-dynamodb": "^3.600.0",
